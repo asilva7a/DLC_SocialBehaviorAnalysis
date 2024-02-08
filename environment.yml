@@ -1,4 +1,4 @@
-name: biolumi_calcium_imaging
+name: DLC_SocialApproach
 channels:
   - defaults
 dependencies:
