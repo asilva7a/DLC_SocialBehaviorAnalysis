@@ -1,7 +1,6 @@
 import sys
 import os
 import numpy as np
-import deeplabcut as dlc
 import pandas as pd
 
 class ApproachAnalysis_Organizer:
