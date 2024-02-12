@@ -7,9 +7,9 @@ import cv2
 
 class ApproachAnalysis_Organizer:
     # Constructor method to initialize the class
-    def __init__(self, project_folder):
-        self.project_folder = project_folder  # Store the project folder path
-        self.directory_df = self.get_directory_df()  # Initialize the directory DataFrame
+   def __init__(self, project_folder):
+        self.project_folder = project_folder # Set the project folder
+        self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
 
     # Method to get user input for animal IDs and treatments
     def get_user_input(self):
