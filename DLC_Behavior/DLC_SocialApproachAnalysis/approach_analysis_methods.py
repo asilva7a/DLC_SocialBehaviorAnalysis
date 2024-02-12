@@ -27,8 +27,10 @@ class ApproachAnalysis_Organizer:
                 all_files.append(os.path.join(root, file))
         return all_files
     
+     
     def copy_and_sort_file_types(self,all_files):
-        return [file for file in all_files if file.endswith('.csv') or file.endswith('.mp4') or file.endswith('.h5') or file.endswith()]
+
+        return [file for file in all_files if file.endswith('.csv') or file.endswith('.mp4') or file.endswith('.h5')]
 
 
 
