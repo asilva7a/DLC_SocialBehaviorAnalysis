@@ -1,9 +1,7 @@
-import sys
 import os
 import pandas as pd
-from PIL import Image
-import numpy as np
-import cv2
+import re
+
 
 class ApproachAnalysis_Organizer:
     # Constructor method to initialize the class
@@ -35,8 +33,7 @@ class UserInput(ApproachAnalysis_Organizer):
 
     # Method to get user input for animal IDs and treatments
     def get_user_input(self):
-        self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
-        while True:
+         while True:
             animal_id = input('Enter the animal ID (or type "done" to finish): ')
             if animal_id.lower() == 'done':
                 break  
@@ -44,7 +41,7 @@ class UserInput(ApproachAnalysis_Organizer):
                 print(f'Animal ID {animal_id} already exists. Please enter a different animal ID.')
             else:
                 treatments = self.get_treatments(animal_id)
-                self.animal_data[animal_id] = treatments             
+                self.animal_data[animal_id] = treatments 
 
     # Method to get treatments for a given animal ID
     def get_treatments(self, animal_id):
@@ -52,7 +49,7 @@ class UserInput(ApproachAnalysis_Organizer):
             treatments = input(f'Enter the three treatments for animal ID {animal_id}, separated by commas: ').split(',') 
             if len(treatments) == 3:
                 return treatments 
-            else:
+            else: 
                 print('Invalid number of treatments. Please enter exactly three treatments.') 
 
     # Method to organize files based on animal IDs and treatments  
