@@ -27,38 +27,35 @@ class ApproachAnalysis_Organizer:
                 all_files.append(os.path.join(root, file))
         return all_files
     
-     
-    def copy_and_sort_file_types(self,all_files):
-
-        return [file for file in all_files if file.endswith('.csv') or file.endswith('.mp4') or file.endswith('.h5')]
-
-
-
-
+class get_user_input:
+    def __init__(self, project_folder):
+        self.project_folder = project_folder # Set the project folder
+        self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
+        self.animal_data = {} # Initialize an empty dictionary to store animal IDs and treatments
+        
     # Method to get user input for animal IDs and treatments
     def get_user_input(self):
-        self.animal_data = {} # Initialize an empty dictionary to store animal IDs and treatments
+        self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
         while True:
             animal_id = input('Enter the animal ID (or type "done" to finish): ')
             if animal_id.lower() == 'done':
                 break  
             elif animal_id in self.directory_df['directory_name'].values:
-                print('Animal ID already exists. Please try again.')  
+                print(f'Animal ID {animal_id} already exists. Please enter a different animal ID.')
             else:
-                treatments = self.get_treatments(animal_id)  # Get treatments for the animal ID
-                if treatments:
-                    self.animal_data[animal_id] = treatments  # Store the treatments in the animal_data dictionary
+                treatments = self.get_treatments(animal_id)
+                self.animal_data[animal_id] = treatments  # Add the animal ID and treatments to the dictionary        
 
     # Method to get treatments for a given animal ID
     def get_treatments(self, animal_id):
         while True:
-            treatments = input(f'Enter the three treatments for animal ID {animal_id}, separated by commas: ').split(',') #future: write a method that will loop through
+            treatments = input(f'Enter the three treatments for animal ID {animal_id}, separated by commas: ').split(',') 
             if len(treatments) == 3:
                 return treatments 
             else:
                 print('Invalid number of treatments. Please enter exactly three treatments.') 
 
-    # Method to organize files based on animal IDs and treatments
+    # Method to organize files based on animal IDs and treatments  
     def organize_files(self):
         for animal_id, treatments in self.animal_data.items():  # Iterate over each animal ID and its treatments
             for treatment in treatments:
