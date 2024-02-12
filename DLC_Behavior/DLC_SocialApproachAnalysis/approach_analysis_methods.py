@@ -27,12 +27,12 @@ class ApproachAnalysis_Organizer:
                 all_files.append(os.path.join(root, file))
         return all_files
     
-class get_user_input:
+class UserInput(ApproachAnalysis_Organizer):
     def __init__(self, project_folder):
         self.project_folder = project_folder # Set the project folder
         self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
         self.animal_data = {} # Initialize an empty dictionary to store animal IDs and treatments
-        
+
     # Method to get user input for animal IDs and treatments
     def get_user_input(self):
         self.directory_df = self.initialize_directory_df()  # Initialize the directory DataFrame
@@ -44,7 +44,8 @@ class get_user_input:
                 print(f'Animal ID {animal_id} already exists. Please enter a different animal ID.')
             else:
                 treatments = self.get_treatments(animal_id)
-                self.animal_data[animal_id] = treatments  # Add the animal ID and treatments to the dictionary        
+                self.animal_data[animal_id] = treatments  
+                    
 
     # Method to get treatments for a given animal ID
     def get_treatments(self, animal_id):
