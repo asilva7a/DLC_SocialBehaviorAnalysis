@@ -47,22 +47,22 @@ class ApproachAnalysis_Organizer:
             treatments = input(f'Enter the three treatments for animal ID {animal_id}, separated by commas: ').split(',') #future: write a method that will loop through
             if len(treatments) == 3:
                 return treatments 
-    def initialize_directory_df(self):
-        directory_df = pd.DataFrame(columns=['video', 'directory'])  # Initialize an empty DataFrame with columns for video and directory
-        for root, dirs, files in os.walk(self.project_folder): 
-            for file in files: # Iterate over the files in the folder
-                if file.endswith('.mp4'):  
-                    directory_df = directory_df.append({'video': file, 'directory': root}, ignore_index=True) # Append the file name and directory to the DataFrame
-            return directory_df 
+            else:
+                print('Invalid number of treatments. Please enter exactly three treatments.') 
 
-    # Method to list all files in a given folder
-    def list_files(self, folder_name):
-        folder_path = os.path.join(self.project_folder, folder_name)  # Create the path for the folder
-        all_files = []  # Initialize an empty list to store file names
-        for root, dirs, files in os.walk(folder_path):  # Walk through the folder
-            for file in files:
-                all_files.append(file)  # Append each file to the list
-        return all_files  # Return the list of files
+    # Method to organize files based on animal IDs and treatments
+    def organize_files(self):
+        for animal_id, treatments in self.animal_data.items():  # Iterate over each animal ID and its treatments
+            for treatment in treatments:
+                treatment_folder = os.path.join(self.project_folder, treatment.strip())  # Create a path for the treatment folder
+                if not os.path.exists(treatment_folder):
+                    os.makedirs(treatment_folder)  
+                animal_folder = os.path.join(treatment_folder, animal_id.strip())  # Create a path for the animal folder within the treatment folder
+                if not os.path.exists(animal_folder):
+                    os.makedirs(animal_folder) 
+                for file in self.directory_df[self.directory_df['directory'].str.contains(animal_id)].values:
+                    file_path = os.path.join(file[1], file[0])  # Get the full path of the file
+                    os.rename(file_path, os.path.join(animal_folder, file[0]))  # Move the file to the appropriate folder
     
     
 
