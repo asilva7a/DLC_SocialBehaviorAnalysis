@@ -47,24 +47,6 @@ class ApproachAnalysis_Organizer:
             treatments = input(f'Enter the three treatments for animal ID {animal_id}, separated by commas: ').split(',') #future: write a method that will loop through
             if len(treatments) == 3:
                 return treatments 
-            else:
-                print('Invalid number of treatments. Please enter exactly three treatments.') 
-
-    # Method to organize files based on animal IDs and treatments
-    def organize_files(self):
-        for animal_id, treatments in self.animal_data.items():  # Iterate over each animal ID and its treatments
-            for treatment in treatments:
-                treatment_folder = os.path.join(self.project_folder, treatment.strip())  # Create a path for the treatment folder
-                if not os.path.exists(treatment_folder):
-                    os.makedirs(treatment_folder)  
-                animal_folder = os.path.join(treatment_folder, animal_id.strip())  # Create a path for the animal folder within the treatment folder
-                if not os.path.exists(animal_folder):
-                    os.makedirs(animal_folder) 
-                for file in self.directory_df[self.directory_df['directory'].str.contains(animal_id)].values:
-                    file_path = os.path.join(file[1], file[0])  # Get the full path of the file
-                    os.rename(file_path, os.path.join(animal_folder, file[0]))  # Move the file to the appropriate folder
-
-    # Method to initialize the directory DataFrame
     def initialize_directory_df(self):
         directory_df = pd.DataFrame(columns=['video', 'directory'])  # Initialize an empty DataFrame with columns for video and directory
         for root, dirs, files in os.walk(self.project_folder): 
