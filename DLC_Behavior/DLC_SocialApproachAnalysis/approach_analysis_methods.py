@@ -27,6 +27,12 @@ class ApproachAnalysis_Organizer:
                 all_files.append(os.path.join(root, file))
         return all_files
     
+    def copy_and_sort_file_types(self,all_files):
+        return [file for file in all_files if file.endswith('.csv') or file.endswith('.mp4') or file.endswith('.h5') or file.endswith()]
+
+
+
+
     # Method to get user input for animal IDs and treatments
     def get_user_input(self):
         self.animal_data = {} # Initialize an empty dictionary to store animal IDs and treatments
@@ -34,7 +40,7 @@ class ApproachAnalysis_Organizer:
             animal_id = input('Enter the animal ID (or type "done" to finish): ')
             if animal_id.lower() == 'done':
                 break  
-            elif animal_id in self.directory_df['directory'].values:
+            elif animal_id in self.directory_df['directory_name'].values:
                 print('Animal ID already exists. Please try again.')  
             else:
                 treatments = self.get_treatments(animal_id)  # Get treatments for the animal ID
